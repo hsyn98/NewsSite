@@ -1,0 +1,39 @@
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="container">
+        <form method="GET">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="table-bordered">Call an API</legend>
+                    <h3>Sources: </h3>
+                    <input list="sources" name="sources">
+                        <datalist id="sources">
+                            {% for sc in source %}
+                            <option value="{{sc.id}}">{{sc.name}}</option>
+                            {% endfor %}
+                        </datalist>
+                    <h3 style="margin-top: 10px">Language: </h3>
+                    <input list="language" name="language">
+                        <datalist id="language">
+                            <option value="en">English</option>
+                            <option value="ru">Russian</option>
+                        </datalist>
+                    <h3 style="margin-top: 10px">Category: </h3>
+                    <input list="category" name="q">
+                        <datalist id="category">
+                            <option value="business">
+                            <option value="entertainment">
+                            <option value="general">
+                            <option value="health">
+                            <option value="science">
+                            <option value="sports">
+                            <option value="technology">
+                        </datalist>
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-default" type="submit" name="button">Call for an API</button>
+            </div>
+        </form>
+    </div>
+{% endblock content %}

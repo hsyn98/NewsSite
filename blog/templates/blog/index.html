@@ -1,0 +1,57 @@
+{% extends "blog/base.html" %}
+{% block content %}
+    <!-- section -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+
+		    {% if user.is_authenticated %}		<!-- row -->
+                <div class="row">
+                    <div class="col-md-12">
+						<div class="section-title">
+							<h2>Recommended for you</h2>
+						</div>
+					</div>
+                    {% for pos in recommended %}
+					    <div class="col-md-4">
+						    <div class="post">
+							    <a class="post-img" href="{% url 'post-detail' pos.id  %}"><img width = 340 height = 200; src={{ pos.image_url }}></a>
+							    <div class="post-body">
+								    <div class="post-meta">
+									    <a class="post-category cat-1" href="{% url 'category' pos.category %}">{{ pos.category }}</a>
+									    <span class="post-date">{{ pos.publish_date }}</span>
+								    </div>
+								    <h3 style="width : 340px; overflow:hidden; display:inline-block; white-space: nowrap;" class="post-title"><a href="{% url 'post-detail' pos.id  %}">{{ pos.title }}</a></h3>
+							    </div>
+						    </div>
+					    </div>
+                    {% endfor %}
+            {% endif %}
+				<div class="row">
+					<div class="col-md-12">
+						<div class="section-title">
+							<h2>Recent Posts</h2>
+						</div>
+					</div>
+
+
+                    {% for pos in post %}
+					<div class="col-md-4">
+						<div class="post">
+							<a class="post-img" href="{% url 'post-detail' pos.id  %}"><img width = 340 height = 200; src={{ pos.image_url }} alt=""></a>
+							<div class="post-body">
+								<div class="post-meta">
+									<a class="post-category cat-1" href={% url 'category' pos.category %}>{{ pos.category }}</a>
+									<span class="post-date">{{ pos.publish_date }}</span>
+								</div>
+								<h3 style="width : 340px; overflow:hidden; display:inline-block; text-overflow: ellipsis; white-space: nowrap;" class="post-title"><a href="{% url 'post-detail' pos.id  %}">{{ pos.title }}</a></h3>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+                </div>
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /section -->
+{% endblock content %}
